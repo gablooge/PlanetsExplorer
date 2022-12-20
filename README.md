@@ -32,10 +32,15 @@ It represents the testing brief of the imaginary application called Planets Expl
         ```
         php artisan migrate
         ```
+    - Truncate database
+        ```
+        php artisan migrate:fresh
+        ```
     - Run the shell with tinker
         ```sh
         php artisan tinker
         ```
+
 - Sync planets
     - sync all planets
         ```sh

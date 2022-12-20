@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string("diameter");
             $table->string("climate");
             $table->string("gravity");
-            $table->json("terrain");
             $table->string("surface_water");
             $table->string("population");
             $table->string("url");
