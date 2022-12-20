@@ -21,10 +21,28 @@ It represents the testing brief of the imaginary application called Planets Expl
         ./vendor/bin/sail down
         ```
     - Rebuild containers
-        ```
+        ```sh
         ./vendor/bin/sail build --no-cache
         ```
     - Run publicly with sail
         ```
         ./vendor/bin/sail share
+        ```
+    - Run migrate
+        ```
+        php artisan migrate
+        ```
+    - Run the shell with tinker
+        ```sh
+        php artisan tinker
+        ```
+- Sync planets
+    - sync all planets
+        ```sh
+        php artisan planets:sync
+        ```
+    - sync specific planet by ID
+        ```sh
+        # php artisan planets:sync {planet_id}
+        php artisan planets:sync 2
         ```
