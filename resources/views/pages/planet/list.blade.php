@@ -22,13 +22,15 @@
   <div class="card-body table-responsive">
     <table class="table table-striped planets-table">
       <thead>
-        <th>No</th>
-        <th>Name</th>
-        <th>Rotation Periode</th>
-        <th>Orbital Periode</th>
-        <th>Diameter</th>
-        <th>Climate</th>
-        <th>Gravity</th>
+        <tr>
+          <th>No</th>
+          <th>Name</th>
+          <th>Rotation Periode</th>
+          <th>Orbital Periode</th>
+          <th>Diameter</th>
+          <th>Climate</th>
+          <th>Gravity</th>
+        </tr>
       </thead>
       <tbody>
       </tbody>
@@ -39,14 +41,65 @@
 
 @section("extrastyle")
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css"/>
 @endsection
 
 @section("extrajs")
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
 <script>
 $(document).ready(function () {
+    $('.planets-table thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('.planets-table thead');
     $('.planets-table').DataTable({
       ajax: '{{ route("planet-data") }}',
+      orderCellsTop: true,
+      initComplete: function () {
+        var api = this.api();
+        // For each column
+        api
+            .columns()
+            .eq(0)
+            .each(function (colIdx) {
+                var cell = $('.filters th').eq(
+                    $(api.column(colIdx).header()).index()
+                );
+                if(colIdx > 1){
+                  // Set the header cell to contain the input element
+                  var title = $(cell).text();
+                  $(cell).html('<input type="text" placeholder="' + title + '" />');
+  
+                  // On every keypress in this input
+                  $('input',
+                    $('.filters th').eq($(api.column(colIdx).header()).index())).off('keyup change').on('change', function (e) {
+                        // Get the search value
+                        $(this).attr('title', $(this).val());
+                        var regexr = '({search})'; //$(this).parents('th').find('select').val();
+  
+                        var cursorPosition = this.selectionStart;
+                        // Search the column for that value
+                        api
+                            .column(colIdx)
+                            .search(
+                                this.value != ''
+                                    ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                    : '',
+                                this.value != '',
+                                this.value == ''
+                            )
+                            .draw();
+                    }).on('keyup', function (e) {
+                        e.stopPropagation();
+                        $(this).trigger('change');
+                        $(this).focus()[0].setSelectionRange(cursorPosition, cursorPosition);
+                    });
+                } else {
+                  $(cell).html('');
+                }
+            });
+      },
       processing: true,
       serverSide: true,
       columns: [
