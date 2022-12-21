@@ -40,6 +40,10 @@ It represents the testing brief of the imaginary application called Planets Expl
         ```sh
         php artisan tinker
         ```
+    - Run the unit tests
+        ```
+        php artisan test
+        ```
 
 - Sync planets
     - sync all planets
