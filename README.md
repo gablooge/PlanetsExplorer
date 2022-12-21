@@ -30,28 +30,28 @@ It represents the testing brief of the imaginary application called Planets Expl
         ```
     - Run migrate
         ```
-        php artisan migrate
+        ./vendor/bin/sail artisan migrate
         ```
     - Truncate database
         ```
-        php artisan migrate:fresh
+        ./vendor/bin/sail artisan migrate:fresh
         ```
     - Run the shell with tinker
         ```sh
-        php artisan tinker
+        ./vendor/bin/sail artisan tinker
         ```
     - Run the unit tests
         ```
-        php artisan test
+        ./vendor/bin/sail artisan test
         ```
 
 - Sync planets
     - sync all planets
         ```sh
-        php artisan planets:sync
+        ./vendor/bin/sail artisan planets:sync
         ```
     - sync specific planet by ID
         ```sh
-        # php artisan planets:sync {planet_id}
-        php artisan planets:sync 2
+        # ./vendor/bin/sail artisan planets:sync {planet_id}
+        ./vendor/bin/sail artisan planets:sync 2
         ```
