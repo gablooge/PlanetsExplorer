@@ -18,8 +18,7 @@ class LogbookAPI extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'lat' => 'required',
-            'long' => 'required',
-            'people_id' => 'required'
+            'long' => 'required'
         ]);
 
         if ($validator->fails()) {    
@@ -32,7 +31,7 @@ class LogbookAPI extends Controller
         $logbook->weather = $request->weather;
         $logbook->lat = $request->lat;
         $logbook->long = $request->long;
-        $logbook->people_id = $request->people_id;
+        $logbook->author_id = $request->author_id;
         $logbook->save();
 
         return response()->json($logbook);

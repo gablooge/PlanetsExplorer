@@ -43,6 +43,8 @@ It represents the testing brief of the imaginary application called Planets Expl
     - Run the unit tests
         ```
         ./vendor/bin/sail artisan test
+        # with coverage
+        ./vendor/bin/sail artisan test --coverage
         ```
 
 - Sync planets

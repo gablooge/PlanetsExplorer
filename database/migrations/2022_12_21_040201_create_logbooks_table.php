@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string("weather")->nullable();
             $table->string("lat");
             $table->string("long");
-            $table->bigInteger("people_id")->unsigned();
-            $table->foreign("people_id")
+            $table->bigInteger("author_id")->unsigned()->nullable();
+            $table->foreign("author_id")
                 ->references("id")
                 ->on("people")->onDelete('cascade');
             $table->timestamps();
