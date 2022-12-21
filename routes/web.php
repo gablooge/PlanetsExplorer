@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['\App\Http\Controllers\PlanetPage','page'])->name('planet_list');
+Route::get('/planet-ajax-data',['\App\Http\Controllers\PlanetPage','getPlanetData'])->name("planet-data");
+
+Route::get('/logbooks',['\App\Http\Controllers\LogbookPage','list'])->name('logbook_list');
+Route::get('/logbooks/create',['\App\Http\Controllers\LogbookPage','create'])->name('logbook_create');
+Route::get('/logbooks-ajax-data',['\App\Http\Controllers\LogbookPage','getPlanetData'])->name("logbook_datatable");
